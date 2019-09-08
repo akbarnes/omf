@@ -1,1 +1,1 @@
-docker build -t abarnes/omf:0.1 -t abarnes/omf:latest .
+docker build -t abarnes/omf:0.2 -t abarnes/omf:latest .

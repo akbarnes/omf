@@ -5,6 +5,13 @@ from jinja2 import Template
 from multiprocessing import Process
 from passlib.hash import pbkdf2_sha512
 import json, os, flask_login, hashlib, random, time, datetime as dt, shutil, boto.ses, csv, sys, platform
+
+# Import smtplib for the actual sending function
+import smtplib
+
+# Import the email modules we'll need
+from email.mime.text import MIMEText
+
 try:
 	import fcntl
 except:
@@ -210,9 +217,28 @@ def fastNewUser(email):
 		with open("data/User/"+user["username"]+".json","w") as outFile:
 			json.dump(user, outFile, indent=4)
 		message = "Thank you for registering an account on OMF.coop.\n\nYour password is: " + randomPass + "\n\n You can change this password after logging in."
-		key = open("emailCredentials.key").read()
-		c = boto.ses.connect_to_region("us-east-1", aws_access_key_id="AKIAJLART4NXGCNFEJIQ", aws_secret_access_key=key)
-		mailResult = c.send_email("admin@omf.coop", "OMF.coop User Account", message, [email])
+		#key = open("emailCredentials.key").read()
+		#c = boto.ses.connect_to_region("us-east-1", aws_access_key_id="AKIAJLART4NXGCNFEJIQ", aws_secret_access_key=key)
+		#mailResult = c.send_email("admin@omf.coop", "OMF.coop User Account", message, [email])
+
+		# Open a plain text file for reading.  For this example, assume that
+		# the text file contains only ASCII characters.
+		with open(textfile, 'rb') as fp:
+		    # Create a text/plain message
+		    msg = MIMEText(message)
+
+		me = "abarnes@pin3.io"
+		you = email
+		msg['Subject'] = "OMF account registration"
+		msg['From'] = me
+		msg['To'] = you
+
+		# Send the message via our own SMTP server, but don't include the
+		# envelope header.
+		s = smtplib.SMTP('localhost')
+		s.sendmail(me, [you], msg.as_string())
+		s.quit()
+
 		nextUrl = str(request.args.get("next","/"))
 		return redirect(nextUrl)
 
