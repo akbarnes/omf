@@ -218,6 +218,7 @@ def fastNewUser(email):
 			json.dump(user, outFile, indent=4)
 		message = "Thank you for registering an account on OMF.coop.\n\nYour password is: " + randomPass + "\n\n You can change this password after logging in."
 		print message
+		app.logger.info(message)
 		#key = open("emailCredentials.key").read()
 		#c = boto.ses.connect_to_region("us-east-1", aws_access_key_id="AKIAJLART4NXGCNFEJIQ", aws_secret_access_key=key)
 		#mailResult = c.send_email("admin@omf.coop", "OMF.coop User Account", message, [email])
