@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --name omf -it -p 5000:5000 abarnes/omf:latest 

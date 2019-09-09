@@ -7,7 +7,7 @@ RUN apt-get install -y git python2.7:i386 sudo
 RUN ln -s /usr/bin/python2.7 /usr/bin/python
 
 # Set up tzdata
-ADD setup-tzdata.sh /usr/local/bin/setup-tzdata
+ADD setup-tzdata /usr/local/bin/setup-tzdata
 RUN chmod 755 /usr/local/bin/setup-tzdata
 RUN /usr/local/bin/setup-tzdata
 
