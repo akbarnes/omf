@@ -218,31 +218,15 @@ def fastNewUser(email):
 			json.dump(user, outFile, indent=4)
 		message = "Thank you for registering an account on OMF.coop.\n\nYour password is: " + randomPass + "\n\n You can change this password after logging in."
 		print message
-		app.logger.info(message)
-		#key = open("emailCredentials.key").read()
-		#c = boto.ses.connect_to_region("us-east-1", aws_access_key_id="AKIAJLART4NXGCNFEJIQ", aws_secret_access_key=key)
-		#mailResult = c.send_email("admin@omf.coop", "OMF.coop User Account", message, [email])
 
-		# Open a plain text file for reading.  For this example, assume that
-		# the text file contains only ASCII characters.
-		#with open(textfile, 'rb') as fp:
-		    # Create a text/plain message
-		#    msg = MIMEText(message)
+		return redirect('/newPassword/{}/{}'.format(email, randomPass))
 
-		me = "art@pin3.io"
-		you = email
-		msg['Subject'] = "OMF account registration"
-		msg['From'] = me
-		msg['To'] = you
+@app.route('/newPassword/<email>/<password>')
+def newPassword(email, password):
+    #name = request.args.get("password", "error creating password")
 
-		## Send the message via our own SMTP server, but don't include the
-		## envelope header.
-		s = smtplib.SMTP('localhost')
-		s.sendmail(me, [you], msg.as_string())
-		s.quit()
-
-		nextUrl = str(request.args.get("next","/"))
-		return redirect(nextUrl)
+    #return 'Your new password is {}. You should change it.'.format(password)
+    return render_template("newPassword.html", email=email, password=password)
 
 @app.route("/register/<email>/<reg_key>", methods=["GET", "POST"])
 def register(email, reg_key):
