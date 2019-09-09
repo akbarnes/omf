@@ -17,5 +17,9 @@ RUN mkdir -p /usr/share/omf
 RUN mv /opt/omf/Data /usr/share/omf/data
 RUN cd /opt/omf && python2.7 install.py
 
+# move data so it can be symlinked if needed
+RUN mkdir -p /usr/share/omf
+RUN mv /opt/omf/omf/data /usr/share/omf/data
+
 CMD cd /opt/omf/omf && python2.7 web.py
 
