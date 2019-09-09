@@ -2,5 +2,6 @@
 user=akbarnes
 repo=omf
 img=$user/$repo
+ver=0.5
 
-docker build -t $img:0.4 -t $img:latest .
+docker build -t $img:$ver -t $img:latest .
