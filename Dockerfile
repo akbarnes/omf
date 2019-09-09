@@ -13,8 +13,6 @@ RUN /usr/local/bin/setup-tzdata
 
 # Set up OMF
 ADD . /opt/omf
-RUN mkdir -p /usr/share/omf
-RUN mv /opt/omf/Data /usr/share/omf/data
 RUN cd /opt/omf && python2.7 install.py
 
 # move data so it can be symlinked if needed
