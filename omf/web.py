@@ -7,10 +7,10 @@ from passlib.hash import pbkdf2_sha512
 import json, os, flask_login, hashlib, random, time, datetime as dt, shutil, boto.ses, csv, sys, platform
 
 # Import smtplib for the actual sending function
-#import smtplib
+import smtplib
 
 # Import the email modules we'll need
-#from email.mime.text import MIMEText
+from email.mime.text import MIMEText
 
 try:
 	import fcntl
@@ -229,17 +229,17 @@ def fastNewUser(email):
 		    # Create a text/plain message
 		#    msg = MIMEText(message)
 
-		#me = "abarnes@pin3.io"
-		#you = email
-		#msg['Subject'] = "OMF account registration"
-		#msg['From'] = me
-		#msg['To'] = you
+		me = "art@pin3.io"
+		you = email
+		msg['Subject'] = "OMF account registration"
+		msg['From'] = me
+		msg['To'] = you
 
 		## Send the message via our own SMTP server, but don't include the
 		## envelope header.
-		#s = smtplib.SMTP('localhost')
-		#s.sendmail(me, [you], msg.as_string())
-		#s.quit()
+		s = smtplib.SMTP('localhost')
+		s.sendmail(me, [you], msg.as_string())
+		s.quit()
 
 		nextUrl = str(request.args.get("next","/"))
 		return redirect(nextUrl)
