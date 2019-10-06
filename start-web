@@ -1,0 +1,5 @@
+#!/bin/sh
+
+test ! -d /opt/omf/omf/data/Users && cp -r /usr/share/omf/data/* /opt/omf/omf/data
+cd /opt/omf/omf
+python web.py

@@ -19,5 +19,5 @@ RUN cd /opt/omf && python2.7 install.py
 RUN mkdir -p /usr/share/omf
 RUN mv /opt/omf/omf/data /usr/share/omf/data
 
-CMD cd /opt/omf/omf && python2.7 web.py
+CMD /opt/omf/start-web
 
