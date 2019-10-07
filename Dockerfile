@@ -1,6 +1,12 @@
 FROM ubuntu
 
+ENV HTTP_PROXY="http://proxyout.lanl.gov:8080"
+ENV HTTPS_PROXY="http://proxyout.lanl.gov:8080"
+ENV http_proxy="http://proxyout.lanl.gov:8080"
+ENV https_proxy="http://proxyout.lanl.gov:8080"
+
 # Set up 32-bit python
+COPY apt.conf /etc/apt
 RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN apt-get install -y git python2.7:i386 sudo
@@ -19,5 +25,5 @@ RUN cd /opt/omf && python2.7 install.py
 RUN mkdir -p /usr/share/omf
 RUN mv /opt/omf/omf/data /usr/share/omf/data
 
-CMD cd /opt/omf/omf && python2.7 web.py
+CMD /opt/omf/start-web
 

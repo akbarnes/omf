@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run --name omf -v $PWD/omf/data:/opt/omf/omf/Data -it -p 5000:5000 abarnes/omf:latest 
