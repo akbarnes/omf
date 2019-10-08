@@ -1,4 +1,1 @@
-#!/usr/bin/fish
-
-docker stop $1
-docker rm $1
+kill-docker.fish
