@@ -1,0 +1,2 @@
+docker push akbarnes/omf:0.8
+docker push akbarnes/omf:latest
